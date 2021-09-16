@@ -28,14 +28,13 @@ class TeaService with ChangeNotifier {
   Future<List<Tea>> exampleApi() async {
     var url = Uri.parse(dotenv.env['fournisseur'] ?? "");
     http.Response response = await http.get(url);
-    print("Number of Tea : ${response.body.length}");
+    print("Get Tea success ${response.body.length}");
 
     return parseTeas(response.body);
   }
 
   List<Tea> parseTeas(String responseBody) {
     final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-
     _listTeaCache = parsed.map<Tea>((json) => Tea.fromJson(json)).toList();
     _listTeaFilter = _listTeaCache;
     return _listTeaFilter;

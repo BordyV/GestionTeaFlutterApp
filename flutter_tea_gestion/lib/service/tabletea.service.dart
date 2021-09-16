@@ -8,7 +8,7 @@ class TeaDataTableSource extends DataTableSource {
   TeaDataTableSource({
     required List<Tea> teaData,
     required this.onRowSelect,
-  })  : _teaData = teaData;
+  }) : _teaData = teaData;
 
   final List<Tea> _teaData;
   final OnRowSelect onRowSelect;
@@ -27,7 +27,7 @@ class TeaDataTableSource extends DataTableSource {
       cells: <DataCell>[
         DataCell(Text('${_tea.reference}')),
         DataCell(Text('${_tea.name}')),
-        DataCell(Text('${_tea.buyingPrice}')),
+        DataCell(Text('${_tea.totalQuantity}')),
       ],
     );
   }

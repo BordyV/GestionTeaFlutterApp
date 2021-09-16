@@ -15,17 +15,10 @@ class tealist extends StatefulWidget {
 class _tealistState extends State<tealist> {
   @override
   Widget build(BuildContext context) {
-
-
- @override
-  void afterFirstLayout(BuildContext context) {
-    // Calling the same function "after layout" to resolve the issue.
-  }
-
-  //context.read<TeaService> est l'équivalent de Provider.of<TeaService>
-  //read = listen: false || watch = listen: true 
-  //https://stackoverflow.com/questions/59898274/flutter-provider-access-via-addpostframecallback-says-widget-is-outside-the-widg
-  //https://pub.dev/packages/provider#:~:text=Reading%20a%20value,part%20of%20T.
+    //context.read<TeaService> est l'équivalent de Provider.of<TeaService>
+    //read = listen: false || watch = listen: true
+    //https://stackoverflow.com/questions/59898274/flutter-provider-access-via-addpostframecallback-says-widget-is-outside-the-widg
+    //https://pub.dev/packages/provider#:~:text=Reading%20a%20value,part%20of%20T.
     late Future<List<Tea>> teaFuture = context.read<TeaService>().exampleApi();
 
     return MaterialApp(
@@ -41,24 +34,20 @@ class _tealistState extends State<tealist> {
               child: Column(children: <Widget>[
             teaFilter(),
             Flexible(
-              child: Consumer<TeaService>(
-                builder: (context, teaService, child) =>
-                    FutureBuilder<List<Tea>>(
-                  future: teaFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return TableTeaWidget(
-                          listTea:
-                             context.watch<TeaService>().listTeaFilter);
-                    } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }
-                    // By default, show a loading spinner.
-                    return const CircularProgressIndicator();
-                  },
-                ),
+              child: FutureBuilder<List<Tea>>(
+                future: teaFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return TableTeaWidget(
+                        listTea: context.watch<TeaService>().listTeaFilter);
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+                  // By default, show a loading spinner.
+                  return const CircularProgressIndicator();
+                },
               ),
-            )
+            ),
           ])),
         ));
   }
