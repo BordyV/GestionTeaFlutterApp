@@ -40,4 +40,10 @@ class Tea {
       flavor: json['flavor']  == null ? "" : json['flavor'].toString()
     );
   }
+
+@override
+  String toString() {
+    return "($name,$reference)";
+
+  }
 }

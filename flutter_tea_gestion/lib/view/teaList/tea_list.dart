@@ -19,7 +19,7 @@ class _tealistState extends State<tealist> {
     //read = listen: false || watch = listen: true
     //https://stackoverflow.com/questions/59898274/flutter-provider-access-via-addpostframecallback-says-widget-is-outside-the-widg
     //https://pub.dev/packages/provider#:~:text=Reading%20a%20value,part%20of%20T.
-    late Future<List<Tea>> teaFuture = context.read<TeaService>().exampleApi();
+    Future<List<Tea>> teaFuture = context.read<TeaService>().exampleApi();
 
     return Scaffold(
       appBar: AppBar(
@@ -28,14 +28,6 @@ class _tealistState extends State<tealist> {
       body: Center(
           child: Column(children: <Widget>[
         teaFilter(),
-        ElevatedButton(
-          // Within the `FirstScreen` widget
-          onPressed: () {
-            // Navigate to the second screen using a named route.
-            Navigator.pushNamed(context, '/detail');
-          },
-          child: const Text('Launch screen'),
-        ),
         Flexible(
           child: FutureBuilder<List<Tea>>(
             future: teaFuture,

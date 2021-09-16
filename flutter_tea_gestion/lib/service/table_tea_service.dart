@@ -1,7 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tea_gestion/model/tea_model.dart';
 
-typedef OnRowSelect = void Function(int index);
+typedef OnRowSelect = void Function(Tea teaDetail);
 
 //https://github.com/AseemWangoo/experiments_with_web/blob/master/lib/data_table/utilities/data_table_source.dart
 class TeaDataTableSource extends DataTableSource {
@@ -25,12 +26,13 @@ class TeaDataTableSource extends DataTableSource {
     return DataRow.byIndex(
       index: index, // DONT MISS THIS
       cells: <DataCell>[
-        DataCell(Text('${_tea.reference}')),
-        DataCell(Text('${_tea.name}')),
-        DataCell(Text('${_tea.totalQuantity}')),
+        DataCell(Text('${_tea.reference}'), onTap: () => onRowSelect(_tea)),
+        DataCell(Text(_tea.name), onTap: () => onRowSelect(_tea)), 
+        DataCell(Text('${_tea.totalQuantity}'), onTap: () => onRowSelect(_tea)),
       ],
     );
   }
+
 
   @override
   bool get isRowCountApproximate => false;
