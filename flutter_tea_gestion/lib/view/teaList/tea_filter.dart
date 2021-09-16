@@ -4,8 +4,9 @@ import 'package:provider/provider.dart';
 import 'dart:async';
 
 class teaFilter extends StatelessWidget {
-  const teaFilter({Key? key,}) : super(key: key);
-
+  const teaFilter({
+    Key? key,
+  }) : super(key: key);
 
   @override
   build(BuildContext context) {
@@ -23,14 +24,14 @@ class teaFilter extends StatelessWidget {
               _searchResult = value;
               Provider.of<TeaService>(context, listen: false)
                   .filterNameRef(_searchResult);
-
             }),
         trailing: IconButton(
           icon: Icon(Icons.cancel),
           onPressed: () {
             controller.clear();
             _searchResult = '';
-            Provider.of<TeaService>(context, listen:false).filterNameRef(_searchResult);
+            Provider.of<TeaService>(context, listen: false)
+                .filterNameRef(_searchResult);
           },
         ),
       ),

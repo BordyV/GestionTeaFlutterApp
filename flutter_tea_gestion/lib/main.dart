@@ -21,7 +21,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ExampleApp',
+      title: 'TeaGestion',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
       initialRoute: '/',
       routes: routes,
     );
