@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_tea_gestion/routes.dart';
-import 'package:flutter_tea_gestion/service/tea.service.dart';
+import 'package:flutter_tea_gestion/service/tea_service.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {

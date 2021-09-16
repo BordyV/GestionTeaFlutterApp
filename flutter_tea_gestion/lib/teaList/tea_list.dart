@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tea_gestion/model/tea.model.dart';
-import 'package:flutter_tea_gestion/service/tea.service.dart';
+import 'package:flutter_tea_gestion/model/tea_model.dart';
+import 'package:flutter_tea_gestion/service/tea_service.dart';
 import 'package:flutter_tea_gestion/teaList/table_tea_widget.dart';
 import 'package:flutter_tea_gestion/teaList/tea_filter.dart';
 import 'package:provider/provider.dart';

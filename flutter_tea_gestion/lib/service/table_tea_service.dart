@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tea_gestion/model/tea.model.dart';
+import 'package:flutter_tea_gestion/model/tea_model.dart';
 
 typedef OnRowSelect = void Function(int index);
 
