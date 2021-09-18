@@ -10,8 +10,6 @@ class TeaService with ChangeNotifier {
 
   late List<Tea> _listTeaFilter;
 
-  Tea? _teaDetail;
-
   List<Tea> get listTeaCache {
     return _listTeaCache;
   }
@@ -25,15 +23,6 @@ class TeaService with ChangeNotifier {
     _listTeaFilter = newListTeaFilter;
     notifyListeners();
   }
-
-  Tea? get teaDetail {
-    return _teaDetail;
-  }
-
-  set teaDetail(Tea? tea) {
-    _teaDetail = tea;
-  }
-
 
   /// Get data and parse it
   Future<List<Tea>> exampleApi() async {

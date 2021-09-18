@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_tea_gestion/model/tea_model.dart';
 import 'package:flutter_tea_gestion/service/table_tea_service.dart';
 import 'package:flutter_tea_gestion/service/tea_service.dart';
+import 'package:flutter_tea_gestion/view/teaDetail/tea_detail.dart';
 import 'package:provider/src/provider.dart';
 
 class TableTeaWidget extends StatelessWidget {
@@ -12,11 +13,11 @@ class TableTeaWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final _dtSource = TeaDataTableSource(
-        onRowSelect: (teaDetail) => {
-              context.read<TeaService>().teaDetail = teaDetail, //probleme ici
-              Navigator.pushNamed(context, '/detail')
-            },
+        onRowSelect: (teaDet) => {
+          Navigator.pushNamed(context, '/detail', arguments: teaDet)
+        },
         teaData: listTea);
 
     return ConstrainedBox(

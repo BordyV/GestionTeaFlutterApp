@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tea_gestion/model/tea_model.dart';
 import 'package:flutter_tea_gestion/service/tea_service.dart';
 import 'package:provider/src/provider.dart';
 
-class teaDetail extends StatefulWidget {
-  const teaDetail({Key? key}) : super(key: key);
+class teaDetail extends StatelessWidget {
+  const teaDetail({
+    Key? key,
+  }) : super(key: key);
 
-  @override
-  _teaDetailState createState() => _teaDetailState();
-}
-
-class _teaDetailState extends State<teaDetail> {
   @override
   Widget build(BuildContext context) {
-    if (context.read<TeaService>().teaDetail != null) {
+  final teaDetailData = ModalRoute.of(context)!.settings.arguments == null ? "NULL":ModalRoute.of(context)!.settings.arguments as Tea;
+
+    if (teaDetailData != "NULL") {
       return Scaffold(
           appBar: AppBar(
             title: const Text('Detail du thé : '),
           ),
           body: Center(
-              child: Text(context.read<TeaService>().teaDetail.toString())));
+              child: Text(teaDetailData.toString())));
     } else {
-      Navigator.pushNamed(context, '/detail'); // ou probleme ici
+      Navigator.pop(context); // ou probleme ici
       return Text("test");
     }
   }
