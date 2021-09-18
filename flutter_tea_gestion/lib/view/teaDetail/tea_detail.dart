@@ -10,18 +10,23 @@ class teaDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  final teaDetailData = ModalRoute.of(context)!.settings.arguments == null ? "NULL":ModalRoute.of(context)!.settings.arguments as Tea;
+    final teaDetailData = ModalRoute.of(context)!.settings.arguments == null
+        ? "NULL"
+        : ModalRoute.of(context)!.settings.arguments as Tea;
 
     if (teaDetailData != "NULL") {
       return Scaffold(
           appBar: AppBar(
             title: const Text('Detail du thé : '),
           ),
-          body: Center(
-              child: Text(teaDetailData.toString())));
+          body: Center(child: Text(teaDetailData.toString())));
     } else {
-      Navigator.pop(context); // ou probleme ici
-      return Text("test");
+      //Navigator.pop(context); // ou probleme ici
+      return Scaffold(
+          appBar: AppBar(
+            title: const Text('Detail du thé : '),
+          ),
+          body: Center(child: Text("Problème lors du chargement de la page")));
     }
   }
 }

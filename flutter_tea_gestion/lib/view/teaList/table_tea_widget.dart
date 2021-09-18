@@ -13,11 +13,9 @@ class TableTeaWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final _dtSource = TeaDataTableSource(
-        onRowSelect: (teaDet) => {
-          Navigator.pushNamed(context, '/detail', arguments: teaDet)
-        },
+        onRowSelect: (teaDet) =>
+            {Navigator.pushNamed(context, '/detail', arguments: teaDet)},
         teaData: listTea);
 
     return ConstrainedBox(
