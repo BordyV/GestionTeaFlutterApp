@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tea_gestion/model/tea_model.dart';
-import 'package:flutter_tea_gestion/teaList/table_tea_widget.dart';
-import 'package:flutter_tea_gestion/teaList/tea_filter.dart';
+import 'package:flutter_tea_gestion/search/table_tea_widget.dart';
+import 'package:flutter_tea_gestion/search/tea_filter.dart';
 
 class TeaSearchPage extends StatefulWidget {
   const TeaSearchPage({Key? key}) : super(key: key);
@@ -60,11 +60,10 @@ class _TeaSearchPageState extends State<TeaSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-          TeaFilter(filterNameRef: _filterTeaList),
-          TableTeaWidget(listTea: _listTeaFilter),
-        ]));
+        child: SingleChildScrollView(
+            child: Column(children: <Widget>[
+      TeaFilter(filterNameRef: _filterTeaList),
+      TableTeaWidget(listTea: _listTeaFilter),
+    ])));
   }
 }

@@ -26,7 +26,7 @@ class TeaDataTableSource extends DataTableSource {
       index: index, // DONT MISS THIS
       cells: <DataCell>[
         DataCell(Text('${_tea.reference}')),
-        DataCell(Text('${_tea.name}')),
+        DataCell(Text(_tea.name)),
         DataCell(Text('${_tea.totalQuantity}')),
       ],
     );
