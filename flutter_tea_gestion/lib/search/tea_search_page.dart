@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tea_gestion/model/tea_model.dart';
 import 'package:flutter_tea_gestion/search/table_tea_widget.dart';
@@ -11,34 +13,25 @@ class TeaSearchPage extends StatefulWidget {
 }
 
 class _TeaSearchPageState extends State<TeaSearchPage> {
-  final List<Tea> _listTea = [
-    Tea(
-        name: "Earl Grey",
-        reference: 1,
-        totalQuantity: 10,
-        qrCode: "qrCode",
-        description: "Earl Grey",
-        flavor: "Black",
-        lane: "12A",
-        height: "3",
-        box: "2",
-        buyingPrice: 12.0,
-        column: "2"),
-    Tea(
-        name: "Mint Tea",
-        reference: 2,
-        totalQuantity: 10,
-        qrCode: "qrCode",
-        description: "Mint tea of marocco",
-        flavor: "Green",
-        lane: "11A",
-        height: "2",
-        box: "1",
-        buyingPrice: 7.0,
-        column: "1")
-  ];
+  List<Tea> _listTea = [];
 
   List<Tea> _listTeaFilter = [];
+
+  void _parseTeaListFromJson() async {
+    String data =
+        await DefaultAssetBundle.of(context).loadString("assets/tea_mock.json");
+    List<dynamic> teasJson = jsonDecode(data);
+    List<Tea> teas = teasJson.map<Tea>((json) => Tea.fromJson(json)).toList();
+    setState(() {
+      _listTea = teas;
+    });
+  }
+
+  @override
+  void initState() {
+    _parseTeaListFromJson();
+    super.initState();
+  }
 
   void _filterTeaList(String newSearchResult) {
     setState(() {

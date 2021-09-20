@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tea_gestion/model/tea_model.dart';
-import 'package:flutter_tea_gestion/search/tabletea_service.dart';
+import 'package:flutter_tea_gestion/search/table_tea_service.dart';
 
 class TableTeaWidget extends StatelessWidget {
   const TableTeaWidget({Key? key, required this.listTea}) : super(key: key);
