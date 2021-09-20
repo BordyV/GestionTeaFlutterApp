@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_tea_gestion/routes.dart';
-import 'package:flutter_tea_gestion/service/tea.service.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_tea_gestion/teaList/tea_search_page.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => TeaService(),
-      child: const MyApp(),
-    ),
-  );
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ExampleApp',
+  runApp(MaterialApp(
+      title: 'Gestion Tea',
       initialRoute: '/',
-      routes: routes,
-    );
-  }
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+      home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Search Tea'),
+          ),
+          body: const TeaSearchPage())));
 }

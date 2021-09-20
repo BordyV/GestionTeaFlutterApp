@@ -1,36 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tea_gestion/service/tea.service.dart';
 import 'package:provider/provider.dart';
-import 'dart:async';
 
-class teaFilter extends StatelessWidget {
-  const teaFilter({Key? key,}) : super(key: key);
+class TeaFilter extends StatefulWidget {
+  final Function(String) filterNameRef;
 
+  const TeaFilter({Key? key, required this.filterNameRef}) : super(key: key);
 
   @override
-  build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
-    String _searchResult = '';
+  State<StatefulWidget> createState() => _TeaFilterState();
+}
 
+class _TeaFilterState extends State<TeaFilter> {
+  TextEditingController controller = TextEditingController();
+
+  filterList() {
+    widget.filterNameRef(controller.text);
+  }
+
+  @override
+  void initState() {
+    controller.addListener(() {
+      filterList();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: Icon(Icons.search),
+        leading: const Icon(Icons.search),
         title: TextField(
             controller: controller,
-            decoration:
-                InputDecoration(hintText: 'Search', border: InputBorder.none),
-            onChanged: (value) {
-              _searchResult = value;
-              Provider.of<TeaService>(context, listen: false)
-                  .filterNameRef(_searchResult);
-
-            }),
+            decoration: const InputDecoration(
+                hintText: 'Search', border: InputBorder.none)),
         trailing: IconButton(
-          icon: Icon(Icons.cancel),
+          icon: const Icon(Icons.cancel),
           onPressed: () {
             controller.clear();
-            _searchResult = '';
-            Provider.of<TeaService>(context, listen:false).filterNameRef(_searchResult);
           },
         ),
       ),
