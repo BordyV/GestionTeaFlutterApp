@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tea_gestion/model/tea_model.dart';
-import 'package:flutter_tea_gestion/service/table_tea_service.dart';
+import 'package:flutter_tea_gestion/view/teaList/table_tea_service.dart';
 import 'package:flutter_tea_gestion/service/tea_service.dart';
 import 'package:flutter_tea_gestion/view/teaDetail/tea_detail.dart';
 import 'package:provider/src/provider.dart';
 
 class TableTeaWidget extends StatelessWidget {
-  TableTeaWidget({required this.listTea});
+  TableTeaWidget({Key? key, required this.listTea}) : super(key: key);
 
   final List<Tea> listTea;
 
@@ -20,7 +20,7 @@ class TableTeaWidget extends StatelessWidget {
 
     return ConstrainedBox(
         constraints:
-            BoxConstraints.expand(width: MediaQuery.of(context).size.width),
+            BoxConstraints(minWidth: MediaQuery.of(context).size.width),
         child:
 
             /// filt

@@ -1,0 +1,28 @@
+[
+    {
+      "name": "Earl Grey",
+      "reference": 1,
+      "totalQuantity": 10,
+      "qrCode": "qrCode",
+      "description": "Earl Grey",
+      "flavor": "Black",
+      "lane": "12A",
+      "height": "3",
+      "box": "2",
+      "buyingPrice": 12.0,
+      "column": "2"
+    },
+    {
+      "name": "Mint Tea",
+      "reference": 2,
+      "totalQuantity": 10,
+      "qrCode": "qrCode",
+      "description": "Mint tea of marocco",
+      "flavor": "Green",
+      "lane": "11A",
+      "height": "2",
+      "box": "1",
+      "buyingPrice": 7.0,
+      "column": "1"
+    }
+  ]

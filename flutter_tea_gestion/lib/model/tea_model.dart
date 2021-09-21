@@ -31,7 +31,7 @@ class Tea {
       reference: json['reference']  == null  ? 0 : json['reference'] == "" ? 0: json['reference'],
       totalQuantity: json['totalQuantity']  == null  ? 0 : json['totalQuantity'] == "" ? 0: json['totalQuantity'],
       description: json['description']  == null ? "" : json['description'].toString(),
-      buyingPrice: json['buyingPrice']  == null ? 0.0 : json['price'].toDouble(),
+      buyingPrice: json['buyingPrice']  == null ? 0.0 : json['buyingPrice'].toDouble(),
       lane: json['lane']  == null ? "" : json['lane'].toString(),
       column: json['column']  == null ? "" : json['column'].toString(),
       height: json['height']  == null ? "" : json['height'].toString(),
