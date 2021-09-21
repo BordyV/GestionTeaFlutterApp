@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_tea_gestion/service/tea_service.dart';
+import 'package:provider/src/provider.dart';
 
 class TeaFilter extends StatefulWidget {
-  final Function(String) filterNameRef;
-
-  const TeaFilter({Key? key, required this.filterNameRef}) : super(key: key);
+  const TeaFilter({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _TeaFilterState();
@@ -11,18 +13,6 @@ class TeaFilter extends StatefulWidget {
 
 class _TeaFilterState extends State<TeaFilter> {
   TextEditingController controller = TextEditingController();
-
-  filterList() {
-    widget.filterNameRef(controller.text);
-  }
-
-  @override
-  void initState() {
-    controller.addListener(() {
-      filterList();
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +22,10 @@ class _TeaFilterState extends State<TeaFilter> {
         title: TextField(
             controller: controller,
             decoration: const InputDecoration(
-                hintText: 'Search', border: InputBorder.none)),
+                hintText: 'Search', border: InputBorder.none),
+            onChanged: (value) {
+              context.read<TeaService>().filterNameRef(value);
+            }),
         trailing: IconButton(
           icon: const Icon(Icons.cancel),
           onPressed: () {
