@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tea_gestion/model/tea_model.dart';
-import 'package:flutter_tea_gestion/service/tea_service.dart';
-import 'package:provider/src/provider.dart';
 
 class teaDetail extends StatelessWidget {
   const teaDetail({

@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tea_gestion/service/tea_service.dart';
-import 'package:provider/provider.dart';
-import 'dart:async';
-
 
 class TeaFilter extends StatefulWidget {
   final Function(String) filterNameRef;
