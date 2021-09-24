@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tea_gestion/model/tea_model.dart';
+import 'package:flutter_tea_gestion/view/teaDetail/alert_quantity.dart';
 
 class formDetail extends StatelessWidget {
   formDetail({Key? key, required this.teaDet, required this.readOnly})
@@ -46,44 +47,27 @@ class formDetail extends StatelessWidget {
               decoration: InputDecoration(
                   labelText: "Nom", icon: Icon(Icons.emoji_food_beverage))),
           //input totalQuantity
-          Focus(
-            child: TextFormField(
-                readOnly: readOnly,
-                initialValue: teaDet.totalQuantity.toString(),
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Entrez une quantité';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                    labelText: "Quantité", icon: Icon(Icons.inventory))),
-            onFocusChange: (hasFocus) {
-              if (hasFocus) {
+          TextFormField(
+              onTap: () {
                 showDialog<String>(
                   context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: const Text('AlertDialog Title'),
-                    content: const Text('AlertDialog description'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: const Text('Cancel'),
-                      ),
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'OK'),
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  ),
+                  builder: (BuildContext context) => AlertQuantity()
                 );
-              }
-            },
-          ),
+              },
+              readOnly: readOnly,
+              initialValue: teaDet.totalQuantity.toString(),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ],
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Entrez une quantité';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  labelText: "Quantité", icon: Icon(Icons.inventory))),
           TextFormField(
             readOnly: readOnly,
             initialValue: teaDet.buyingPrice.toString(),
