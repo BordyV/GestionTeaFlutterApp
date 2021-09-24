@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_tea_gestion/routes.dart';
-import 'package:provider/provider.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
@@ -17,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'TeaGestion',
       theme: ThemeData(
         primarySwatch: Colors.green,
