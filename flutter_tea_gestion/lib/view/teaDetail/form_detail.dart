@@ -3,12 +3,29 @@ import 'package:flutter/services.dart';
 import 'package:flutter_tea_gestion/model/tea_model.dart';
 import 'package:flutter_tea_gestion/view/teaDetail/alert_quantity.dart';
 
-class formDetail extends StatelessWidget {
-  formDetail({Key? key, required this.teaDet, required this.readOnly})
+class FormDetail extends StatefulWidget {
+  const FormDetail({Key? key, required this.teaDet, required this.readOnly})
       : super(key: key);
-
   final Tea teaDet;
   final bool readOnly;
+
+  @override
+  _FormDetailState createState() => _FormDetailState();
+}
+
+class _FormDetailState extends State<FormDetail> {
+  void _deleteQuantity(int quantity) {
+    setState(() {
+      widget.teaDet.totalQuantity = widget.teaDet.totalQuantity - quantity;
+    });
+  }
+
+  void _addQuantity(int quantity) {
+    setState(() {
+      widget.teaDet.totalQuantity = widget.teaDet.totalQuantity + quantity;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -20,8 +37,8 @@ class formDetail extends StatelessWidget {
         children: [
           //input reference
           TextFormField(
-              readOnly: readOnly,
-              initialValue: teaDet.reference.toString(),
+              readOnly: widget.readOnly,
+              initialValue: widget.teaDet.reference.toString(),
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly
@@ -36,8 +53,8 @@ class formDetail extends StatelessWidget {
                   labelText: "Reference", icon: Icon(Icons.minimize))),
           //input name
           TextFormField(
-              readOnly: readOnly,
-              initialValue: teaDet.name,
+              readOnly: widget.readOnly,
+              initialValue: widget.teaDet.name,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Entrez un nom de thé';
@@ -49,13 +66,16 @@ class formDetail extends StatelessWidget {
           //input totalQuantity
           TextFormField(
               onTap: () {
-                showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => AlertQuantity()
-                );
+                if (widget.readOnly) {
+                  showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertQuantity(
+                          deleteQuantityRef: _deleteQuantity,
+                          addQuantityRef: _addQuantity));
+                }
               },
-              readOnly: readOnly,
-              initialValue: teaDet.totalQuantity.toString(),
+              readOnly: widget.readOnly,
+              initialValue: widget.teaDet.totalQuantity.toString(),
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly
@@ -68,28 +88,41 @@ class formDetail extends StatelessWidget {
               },
               decoration: InputDecoration(
                   labelText: "Quantité", icon: Icon(Icons.inventory))),
+          //input description
           TextFormField(
-            readOnly: readOnly,
-            initialValue: teaDet.buyingPrice.toString(),
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly
-            ],
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Entrez une quantité';
-              }
-              return null;
-            },
-            decoration: InputDecoration(
-                labelText: "Prix", icon: Icon(Icons.euro_symbol)),
-          ),
-          TextFormField(
-            readOnly: readOnly,
+            readOnly: widget.readOnly,
             maxLines: 3,
-            initialValue: teaDet.description,
+            initialValue: widget.teaDet.description,
             decoration: InputDecoration(
                 labelText: "Description", icon: Icon(Icons.description)),
+          ),
+          //input lane
+          TextFormField(
+            readOnly: widget.readOnly,
+            initialValue: widget.teaDet.lane,
+            decoration:
+                InputDecoration(labelText: "lane", icon: Icon(Icons.minimize)),
+          ),
+          //input column
+          TextFormField(
+            readOnly: widget.readOnly,
+            initialValue: widget.teaDet.column,
+            decoration: InputDecoration(
+                labelText: "column", icon: Icon(Icons.minimize)),
+          ),
+          //input height
+          TextFormField(
+            readOnly: widget.readOnly,
+            initialValue: widget.teaDet.height,
+            decoration: InputDecoration(
+                labelText: "height", icon: Icon(Icons.minimize)),
+          ),
+          //input box
+          TextFormField(
+            readOnly: widget.readOnly,
+            initialValue: widget.teaDet.box,
+            decoration:
+                InputDecoration(labelText: "box", icon: Icon(Icons.minimize)),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -97,8 +130,6 @@ class formDetail extends StatelessWidget {
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                         content: Text('On modifie le thé bipbipboup')),

@@ -33,14 +33,14 @@ class _teaDetailState extends State<teaDetail> {
                     _readOnly = !_readOnly;
                   });
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(_readOnly
+                      content: Text(!_readOnly
                           ? 'Mode édition du thé'
                           : 'Mode édition terminé')));
                 },
               ),
             ],
           ),
-          body: Center(child: formDetail(teaDet: teaDet, readOnly: _readOnly)));
+          body: Center(child: FormDetail(teaDet: teaDet, readOnly: _readOnly)));
     } else {
       return Scaffold(
           appBar: AppBar(
